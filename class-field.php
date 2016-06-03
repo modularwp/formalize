@@ -21,6 +21,10 @@ class WP_Formulate_Field {
 		if ( empty( $settings['atts'][ 'name' ] ) ) {
 			$settings['atts'][ 'name' ] = $settings[ 'id' ];
 		}
+// formulate_print_r($settings);
+// echo $settings['context'];
+		$settings = apply_filters( 'formulate_field_settings', $settings, $settings['context'] );
+// formulate_print_r($settings);
 
 		return $settings;
 	}
@@ -34,14 +38,15 @@ class WP_Formulate_Field {
 	public function get_default_settings() {
 		$defaults = array(
 			'id'         => '',        // Unique element ID.
-			'type'       => 'text',
-			'atts' => array(
-				// 'id'     => '',        // Optional. Used if unique element ID and form input ID should not be the same.
-				// 'name'   => '',        // Optional. Used if name and ID of form element should not be the same.
-				// 'class'  => '',        // Optional. CSS class names.
-				// 'value'  => '',        // Optional. The value of the input field.
+			'type'       => 'text',    // Form field type (text, select, textarea, etc.).
+			'context'    => '',        // Allows settings to be filtered based on context (required for widget forms to work properly).
+			'atts'       => array(
+				// 'id'     => '',     // Optional. Used if unique element ID and form input ID should not be the same.
+				// 'name'   => '',     // Optional. Used if name and ID of form element should not be the same.
+				// 'class'  => '',     // Optional. CSS class names.
+				// 'value'  => '',     // Optional. The value of the input field.
 			),
-			'args'   => array(
+			'args'       => array(
 				'label'  => '',        // Text to display as the input title/label.
 				'desc'   => '',        // Optional. Description of form element.
 				'size'   => 'default', // The size of the input (small, default, large; default: default).
