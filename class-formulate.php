@@ -84,11 +84,9 @@ class Formulate {
 				$field_settings['atts']['name'] = $field_settings['widget_instance']->get_field_name( $field_settings['atts']['name'] );
 
 				// Adds 'widefat' class to widget inputs
-				// if ( empty( $field_settings['atts']['class'] ) ) {
-				// 	$field_settings['atts']['class'] = 'widefat';
-				// } else {
-				// 	$field_settings['atts']['class'] = 'widefat ' . $field_settings['atts']['class'];
-				// }
+				if ( empty( $field_settings['atts']['class'] ) ) {
+					$field_settings['atts']['class'] = 'widefat';
+				}
 			}
 
 			// Returns the field output.
