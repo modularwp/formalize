@@ -8,6 +8,9 @@ class WP_Formulate_Field_Text extends WP_Formulate_Field {
 	 * @param array $instance
 	 */
 	public function output( $instance = array() ) {
+		if ( $instance['value'] ) {
+			$instance['atts']['value'] = $instance['value'];
+		}
 
 		// Sets up the output variable.
 		$output = '';

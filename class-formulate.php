@@ -1,5 +1,7 @@
 <?php
 
+// @TODO: determine what form field types should get the 'widefat' class
+//        when used in widget forms.
 
 class Formulate {
 
@@ -75,15 +77,23 @@ class Formulate {
 			$field = new $this->field_types[ $field_settings['type'] ];
 			$field_settings = $field->get_field_settings( $field_settings );
 
+			if ( is_object( $field_settings['widget_instance'] ) ) {
+
+				// Prepares the field settings for widget specific usage.
+				$field_settings['atts']['id'] = $field_settings['widget_instance']->get_field_id( $field_settings['atts']['id'] );
+				$field_settings['atts']['name'] = $field_settings['widget_instance']->get_field_name( $field_settings['atts']['name'] );
+
+				// Adds 'widefat' class to widget inputs
+				// if ( empty( $field_settings['atts']['class'] ) ) {
+				// 	$field_settings['atts']['class'] = 'widefat';
+				// } else {
+				// 	$field_settings['atts']['class'] = 'widefat ' . $field_settings['atts']['class'];
+				// }
+			}
+
 			// Returns the field output.
 			return $field->output( $field_settings );
 		}
-
-		// formulate_print_r( $this->field_types );
-		// $settings = array_replace_recursive( $this->get_default_settings(), $field_settings );
-		// formulate_print_r( $settings );
-
-
 	}
 
 	/**
@@ -130,38 +140,4 @@ class Formulate {
 		// Returns the field settings.
 		return $field_settings;
 	}
-
-
-
-	/**
-	 * Widget specific form field construction
-	 *
-	 * @since  1.0
-	 * @access public
-	 * @param  array  $field_settings Array of input field settings.
-	 * @param  object $instance       Instance of current widget object.
-	 * @return string                 The form field HTML.
-	 */
-	public function get_widget_field( $field_settings, $instance ) {
-
-		// Validates the field settings.
-		$field_settings = $this->validate_field_settings( $field_settings );
-
-		// Are the field settings valid?
-		if ( $field_settings ) {
-
-			// Instantiates the field class.
-			$field = new $this->field_types[ $field_settings['type'] ];
-			$field_settings = $field->get_field_settings( $field_settings );
-
-			// Prepares the field settings for widget specific usage.
-			$field_settings['atts']['id'] = $instance->get_field_id( $field_settings['atts']['id'] );
-			$field_settings['atts']['name'] = $instance->get_field_name( $field_settings['atts']['name'] );
-
-			// Returns the field output.
-			return $field->output( $field_settings );
-		}
-	}
-
-
 }

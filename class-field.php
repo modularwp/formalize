@@ -40,6 +40,7 @@ class WP_Formulate_Field {
 			'id'         => '',        // Unique element ID.
 			'type'       => 'text',    // Form field type (text, select, textarea, etc.).
 			'context'    => '',        // Allows settings to be filtered based on context (required for widget forms to work properly).
+			'value'      => '',        // Allows settings to be filtered based on context (required for widget forms to work properly).
 			'atts'       => array(
 				// 'id'     => '',     // Optional. Used if unique element ID and form input ID should not be the same.
 				// 'name'   => '',     // Optional. Used if name and ID of form element should not be the same.
