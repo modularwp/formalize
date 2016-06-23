@@ -3,14 +3,14 @@
 class WP_Formalize_Field_Text extends WP_Formalize_Field {
 
 	/**
-	 * Outputs the input field
+	 * Generates the form field
 	 *
 	 * @param array $instance
 	 */
 	public function generate_field( $instance = array() ) {
-		if ( $instance['value'] ) {
-			$instance['atts']['value'] = $instance['value'];
-		}
+
+		// Adds the instance value to the attributes array.
+		$instance['atts']['value'] = $instance['value'];
 
 		// Sets up the output variable.
 		$output = '';

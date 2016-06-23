@@ -3,7 +3,7 @@
 class WP_Formalize_Field_Textarea extends WP_Formalize_Field {
 
 	/**
-	 * Outputs the input field
+	 * Generates the form field
 	 *
 	 * @param array $instance
 	 */
@@ -20,8 +20,13 @@ class WP_Formalize_Field_Textarea extends WP_Formalize_Field {
 			$output .= ' ' . esc_attr( $attribute ) . '="' . esc_attr( $value ) . '"';
 		}
 
-		// Closes the field.
+		// Closes the opening element.
 		$output .= '>';
+
+		// Adds content to text area if available.
+		$output .= !empty( $instance['value'] ) ? esc_textarea( $instance['value'] ) : '';
+
+		// Closes the field.
 		$output .= '</textarea>';
 
 		return $output;

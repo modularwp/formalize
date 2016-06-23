@@ -14,7 +14,7 @@ class WP_Formalize_Template {
 
 		// Is there a label?
 		if ( $label ) {
-			return '<label for="' . $id . '">' . $label . '</label>';
+			return '<label for="' . $id . '">' . wp_kses_post( $label ) . '</label>';
 		}
 	}
 
@@ -25,11 +25,11 @@ class WP_Formalize_Template {
 	 * @param string $desc Text to display in the description.
 	 * @return string The description string formatted as a paragraph.
 	 */
-	public function generate_description( $desc = '' ) {
+	public function generate_description( $description = '' ) {
 
 		// Is there a description?
-		if ( $desc ) {
-			return ' <p class="description">' . $desc . '</p>';
+		if ( $description ) {
+			return ' <p class="description">' . wp_kses_post( $description ) . '</p>';
 		}
 	}
 }
