@@ -8,6 +8,7 @@
 // @TODO: figure out where to handle widget prep (probably shouldn't be in this file)
 // @TODO: should templates should be able to determine radio formatting?
 // @TODO: figure out how settings work for radio (where is the settings array stored, and where is it applied (radio group, radio buttons etc.))
+// @TODO: support default content/state if no value has been saved.
 
 
 
@@ -70,6 +71,7 @@ class Formalize {
 			'widget'     => 'WP_Formalize_Template_Widget',
 			'settings'   => 'WP_Formalize_Template_Settings',
 			'form-table' => 'WP_Formalize_Template_Form_Table',
+			'customizer' => 'WP_Formalize_Template_Customizer',
 		);
 
 		// Allows template types to be removed if not needed.
