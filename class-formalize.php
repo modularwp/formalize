@@ -10,7 +10,7 @@
 // @TODO: figure out how settings work for radio (where is the settings array stored, and where is it applied (radio group, radio buttons etc.))
 // @TODO: support default content/state if no value has been saved.
 
-
+namespace Formalize;
 
 class Formalize {
 

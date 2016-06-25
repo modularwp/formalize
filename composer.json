@@ -1,8 +1,8 @@
 {
     "name": "modularwp/formalize",
-    "autoload": {
-        "psr-0" : {
-            "ModularWP\\Formalize" : "src"
-        }
-    }
+    "description": "A class for streamlining form fields in WordPress.",
+    "type": "library",
+    "license": "GPL",
+    "minimum-stability": "dev",
+    "require": {}
 }
