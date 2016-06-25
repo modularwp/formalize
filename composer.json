@@ -1,0 +1,8 @@
+{
+    "name": "modularwp/formalize",
+    "autoload": {
+        "psr-0" : {
+            "ModularWP\\Formalize" : "src"
+        }
+    }
+}
