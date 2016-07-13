@@ -12,6 +12,14 @@ namespace ModularWP\Formalize;
 use PHPUnit_Framework_TestCase;
 
 class BaseFieldTest extends PHPUnit_Framework_TestCase {
+	public function setUp() {
+		\WP_Mock::setUp();
+	}
+
+	public function tearDown() {
+		\WP_Mock::tearDown();
+	}
+
 	/**
 	 * @covers ModularWP\Formalize\BaseField::get_default_settings
 	 */
@@ -28,16 +36,19 @@ class BaseFieldTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @covers ModularWP\Formalize\BaseField::get_field_settings
+	 * @covers ModularWP\Formalize\BaseField::get_default_settings
 	 */
 	public function testGetFieldSettingsReturnsAnArray(  ) {
 		// Arrange.
-//		$base_field = new ConcreteBaseField();
+		\WP_Mock::wpPassthruFunction( 'apply_filters' );
+
+		$base_field = new ConcreteBaseField();
 
 		// Act.
-//		$field_settings = $base_field->get_field_settings( [] );
+		$field_settings = $base_field->get_field_settings( [] );
 
 		// Assert.
-//		$this->assertInternalType( 'array', $field_settings );
+		$this->assertInternalType( 'array', $field_settings );
 	}
 }
 

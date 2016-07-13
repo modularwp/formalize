@@ -12,6 +12,14 @@ use ModularWP\Formalize\FieldInterface;
 use PHPUnit_Framework_TestCase;
 
 class BaseTest extends PHPUnit_Framework_TestCase {
+	public function setUp() {
+		\WP_Mock::setUp();
+	}
+
+	public function tearDown() {
+		\WP_Mock::tearDown();
+	}
+	
 	/**
 	 * @covers ModularWP\Formalize\Templates\Base::generate_label()
 	 */
@@ -31,6 +39,7 @@ class BaseTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGenerateLabelWithNoIdReturnsLabelWithEmptyFor() {
 		// Arrange.
+		\WP_Mock::wpPassthruFunction( 'wp_kses_post', array( 'times' => 1 ) );
 		$template = new ConcreteBaseTemplate();
 
 		// Act.
@@ -46,6 +55,7 @@ class BaseTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGenerateLabelWithIdReturnsLabelWithForPopulated() {
 		// Arrange.
+		\WP_Mock::wpPassthruFunction( 'wp_kses_post', array( 'times' => 1 ) );
 		$template = new ConcreteBaseTemplate();
 
 		// Act.
