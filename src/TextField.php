@@ -12,7 +12,9 @@ class TextField extends BaseField {
 	public function generate_field( $instance = array() ) {
 
 		// Adds the instance value to the attributes array.
-		$instance['atts']['value'] = $instance['value'];
+		if ( array_key_exists( 'atts', $instance ) && array_key_exists( 'value', $instance['atts'] ) ) {
+			$instance['atts']['value'] = $instance['value'];
+		}
 
 		// Sets up the output variable.
 		$output = '';
@@ -21,8 +23,10 @@ class TextField extends BaseField {
 		$output .= '<input type="text"';
 
 		// Loops through the field attributes.
-		foreach( $instance['atts'] as $attribute => $value ) {
-			$output .= ' ' . esc_attr( $attribute ) . '="' . esc_attr( $value ) . '"';
+		if ( array_key_exists( 'atts', $instance ) ) {
+			foreach ( $instance[ 'atts' ] as $attribute => $value ) {
+				$output .= ' ' . esc_attr( $attribute ) . '="' . esc_attr( $value ) . '"';
+			}
 		}
 
 		// Closes the field.
