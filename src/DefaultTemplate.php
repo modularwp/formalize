@@ -1,6 +1,8 @@
 <?php
 
-class WP_Formalize_Template_Default extends WP_Formalize_Template {
+namespace ModularWP\Formalize;
+
+class DefaultTemplate extends BaseTemplate {
 
 	/**
 	 * Outputs the input field

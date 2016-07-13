@@ -1,6 +1,8 @@
 <?php
 
-class WP_Formalize_Template {
+namespace ModularWP\Formalize;
+
+abstract class BaseTemplate implements TemplateInterface {
 
 	/**
 	 * Displays the label for a form element
@@ -32,4 +34,6 @@ class WP_Formalize_Template {
 			return ' <p class="description">' . wp_kses_post( $description ) . '</p>';
 		}
 	}
+
+	abstract function output( $field, $instance = array() );
 }
