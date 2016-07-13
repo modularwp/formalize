@@ -12,10 +12,6 @@ namespace ModularWP\Formalize;
 use PHPUnit_Framework_TestCase;
 
 class BaseFieldTest extends PHPUnit_Framework_TestCase {
-	public function testTestsAreWorking() {
-		$this->assertTrue( true );
-	}
-
 	/**
 	 * @covers ModularWP\Formalize\BaseField::get_default_settings
 	 */
@@ -28,6 +24,20 @@ class BaseFieldTest extends PHPUnit_Framework_TestCase {
 
 		// Assert.
 		$this->assertInternalType( 'array', $default_settings );
+	}
+
+	/**
+	 * @covers ModularWP\Formalize\BaseField::get_field_settings
+	 */
+	public function testGetFieldSettingsReturnsAnArray(  ) {
+		// Arrange.
+//		$base_field = new ConcreteBaseField();
+
+		// Act.
+//		$field_settings = $base_field->get_field_settings( [] );
+
+		// Assert.
+//		$this->assertInternalType( 'array', $field_settings );
 	}
 }
 
