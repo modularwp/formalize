@@ -1,8 +1,11 @@
 <?php
 
-namespace ModularWP\Formalize;
+namespace ModularWP\Formalize\Templates;
 
-abstract class BaseTemplate implements TemplateInterface {
+use ModularWP\Formalize\FieldInterface;
+use ModularWP\Formalize\Interfaces\Template;
+
+abstract class Base implements Template {
 
 	/**
 	 * Displays the label for a form element
@@ -35,5 +38,5 @@ abstract class BaseTemplate implements TemplateInterface {
 		}
 	}
 
-	abstract function output( $field, $instance = array() );
+	abstract public function output( FieldInterface $field, $instance = array() );
 }

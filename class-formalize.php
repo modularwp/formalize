@@ -78,7 +78,7 @@ class Formalize {
 		$templates = apply_filters( 'formalize_templates', $templates );
 
 		// Loads the base field class file.
-		require_once dirname( __FILE__ ) . '/templates/BaseTemplate.php';
+		require_once dirname( __FILE__ ) . '/src/Templates/Base.php';
 
 		// Registers each field supported by default.
 		foreach ( $templates as $id => $class_name ) {
