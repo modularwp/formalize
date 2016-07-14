@@ -1,6 +1,11 @@
 <?php
 
-class WP_Formalize_Template {
+namespace ModularWP\Formalize\Templates;
+
+use ModularWP\Formalize\FieldInterface;
+use ModularWP\Formalize\Interfaces\Template;
+
+abstract class Base implements Template {
 
 	/**
 	 * Displays the label for a form element
@@ -32,4 +37,6 @@ class WP_Formalize_Template {
 			return ' <p class="description">' . wp_kses_post( $description ) . '</p>';
 		}
 	}
+
+	abstract public function output( FieldInterface $field, $instance = array() );
 }

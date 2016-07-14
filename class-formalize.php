@@ -10,7 +10,7 @@
 // @TODO: figure out how settings work for radio (where is the settings array stored, and where is it applied (radio group, radio buttons etc.))
 // @TODO: support default content/state if no value has been saved.
 
-namespace Formalize;
+namespace ModularWP\Formalize;
 
 class Formalize {
 
@@ -78,7 +78,7 @@ class Formalize {
 		$templates = apply_filters( 'formalize_templates', $templates );
 
 		// Loads the base field class file.
-		require_once dirname( __FILE__ ) . '/templates/class-template.php';
+		require_once dirname( __FILE__ ) . '/src/Templates/Base.php';
 
 		// Registers each field supported by default.
 		foreach ( $templates as $id => $class_name ) {

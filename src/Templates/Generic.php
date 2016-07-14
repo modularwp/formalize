@@ -1,13 +1,17 @@
 <?php
 
-class WP_Formalize_Template_Default extends WP_Formalize_Template {
+namespace ModularWP\Formalize\Templates;
+
+use ModularWP\Formalize\FieldInterface;
+
+class Generic extends Base {
 
 	/**
 	 * Outputs the input field
 	 *
 	 * @param array $instance
 	 */
-	public function output( $field, $instance = array() ) {
+	public function output( FieldInterface $field, $instance = array() ) {
 
 		// Sets up the output variable.
 		$output = '';
