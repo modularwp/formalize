@@ -1,6 +1,11 @@
 <?php
 
-class WP_Formalize_Field_Select extends WP_Formalize_Field {
+namespace ModularWP\Formalize\Fields;
+
+use ModularWP\Formalize\FieldInterface;
+use ModularWP\Formalize\Interfaces\Field;
+
+class Select extends Base {
 
 	/**
 	 * Generates the form field

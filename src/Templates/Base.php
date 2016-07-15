@@ -2,10 +2,10 @@
 
 namespace ModularWP\Formalize\Templates;
 
-use ModularWP\Formalize\FieldInterface;
-use ModularWP\Formalize\Interfaces\Template;
+use ModularWP\Formalize\Interfaces\FieldInterface;
+use ModularWP\Formalize\Interfaces\TemplateInterface;
 
-abstract class Base implements Template {
+abstract class Base implements TemplateInterface {
 
 	/**
 	 * Displays the label for a form element

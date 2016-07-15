@@ -6,7 +6,7 @@
  * Time: 11:37
  */
 
-namespace ModularWP\Formalize;
+namespace ModularWP\Formalize\Interfaces;
 
 interface FieldInterface {
 	public function generate_field( $instance = array() );

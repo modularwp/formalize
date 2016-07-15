@@ -2,7 +2,7 @@
 
 namespace ModularWP\Formalize\Templates;
 
-use ModularWP\Formalize\FieldInterface;
+use ModularWP\Formalize\Interfaces\FieldInterface;
 
 class Generic extends Base {
 

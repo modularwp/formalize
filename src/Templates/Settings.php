@@ -1,6 +1,10 @@
 <?php
 
-class WP_Formalize_Template_Settings extends WP_Formalize_Template {
+namespace ModularWP\Formalize\Templates;
+
+use ModularWP\Formalize\Interfaces\FieldInterface;
+
+class Settings extends Base {
 
 	/**
 	 * Outputs the input field

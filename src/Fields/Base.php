@@ -1,8 +1,10 @@
 <?php
 
-namespace ModularWP\Formalize;
+namespace ModularWP\Formalize\Fields;
 
-abstract class BaseField implements FieldInterface {
+use ModularWP\Formalize\Interfaces\FieldInterface;
+
+abstract class Base implements FieldInterface {
 
 	/**
 	 * Merges the arguments array with the defaults array.

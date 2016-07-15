@@ -12,6 +12,8 @@
 
 namespace ModularWP\Formalize;
 
+use ModularWP\Formalize\Fields;
+
 class Formalize {
 
 	/**
@@ -44,21 +46,25 @@ class Formalize {
 	 */
 	public function __construct() {
 
+		require_once dirname( __FILE__ ) . '/Interfaces/FieldInterface.php';
+		require_once dirname( __FILE__ ) . '/Interfaces/TemplateInterface.php';
+		require_once dirname( __FILE__ ) . '/Fields/Base.php';
+		require_once dirname( __FILE__ ) . '/Templates/Base.php';
+
+
 		// Sets up default supported field types.
 		$fields = array(
-			'text'     => 'WP_Formalize_Field_Text',
-			'radio'    => 'WP_Formalize_Field_Radio',
-			'select'   => 'WP_Formalize_Field_Select',
-			'checkbox' => 'WP_Formalize_Field_Checkbox',
-			'textarea' => 'WP_Formalize_Field_Textarea',
-			'color'    => 'WP_Formalize_Field_Color',
+			'text'     => 'Text',
+			'radio'    => 'Radio',
+			'select'   => 'Select',
+			'checkbox' => 'Checkbox',
+			'textarea' => 'Textarea',
+			'color'    => 'Color',
 		);
 
 		// Allows field types to be removed if not needed.
 		$fields = apply_filters( 'formalize_fields', $fields );
 
-		// Loads the base field class file.
-		require_once dirname( __FILE__ ) . '/fields/class-field.php';
 
 		// Registers each field supported by default.
 		foreach ( $fields as $id => $class_name ) {
@@ -67,20 +73,17 @@ class Formalize {
 
 		// Sets up default supported template types.
 		$templates = array(
-			'default'    => 'WP_Formalize_Template_Default',
-			'widget'     => 'WP_Formalize_Template_Widget',
-			'settings'   => 'WP_Formalize_Template_Settings',
-			'form-table' => 'WP_Formalize_Template_Form_Table',
-			'customizer' => 'WP_Formalize_Template_Customizer',
+			'default'    => 'Generic',
+			'widget'     => 'Widget',
+			'settings'   => 'Settings',
+			'form-table' => 'Form_Table',
+			'customizer' => 'Customizer',
 		);
 
 		// Allows template types to be removed if not needed.
 		$templates = apply_filters( 'formalize_templates', $templates );
 
-		// Loads the base field class file.
-		require_once dirname( __FILE__ ) . '/src/Templates/Base.php';
-
-		// Registers each field supported by default.
+		// Registers each template supported by default.
 		foreach ( $templates as $id => $class_name ) {
 			$this->register_template( $id, $class_name );
 		}
@@ -99,7 +102,7 @@ class Formalize {
 	public function register_field( $id, $class_name ) {
 
 		// Defines the expected location of the class file. Not required. Can be included manually.
-		$default_file_location = dirname( __FILE__ ) . '/fields/class-field-' . $id . '.php';
+		$default_file_location = dirname( __FILE__ ) . '/Fields/' . $class_name . '.php';
 
 		// Does the class file exist in the default location?
 		if ( file_exists( $default_file_location ) ) {
@@ -107,7 +110,7 @@ class Formalize {
 		}
 
 		// Is there a class with this class name?
-		if ( class_exists( $class_name ) ) {
+		if ( class_exists( 'ModularWP\Formalize\Fields\\' . $class_name ) ) {
 
 			// Adds field to field list.
 			$this->field_types[$id] = $class_name;
@@ -116,6 +119,8 @@ class Formalize {
 			if ( method_exists( $class_name, 'enqueue' ) ) {
 				add_action( 'admin_enqueue_scripts', array( $class_name, 'enqueue' ) );
 			}
+		}  else {
+			$this->field_types[$id] = $default_file_location . ' does not exist';
 		}
 	}
 
@@ -132,15 +137,17 @@ class Formalize {
 	public function register_template( $id, $class_name ) {
 
 		// Defines the expected location of the class file. Not required. Can be included manually.
-		$default_file_location = dirname( __FILE__ ) . '/templates/class-template-' . $id . '.php';
+		$default_file_location = dirname( __FILE__ ) . '/Templates/' . $class_name . '.php';
 
 		// Does the class file exist in the default location?
 		if ( file_exists( $default_file_location ) ) {
 			require_once $default_file_location;
+		} else {
+			$this->template_types[$id] = $default_file_location . ' does not exist';
 		}
 
 		// Is there a class with this class name?
-		if ( class_exists( $class_name ) ) {
+		if ( class_exists( 'ModularWP\Formalize\Templates\\' . $class_name ) ) {
 			$this->template_types[$id] = $class_name;
 		}
 	}
@@ -162,11 +169,13 @@ class Formalize {
 		if ( $field_settings ) {
 
 			// Instatiates the field class.
-			$field_object = new $this->field_types[ $field_settings['type'] ];
+			$field_class_name = 'ModularWP\Formalize\Fields\\' . $this->field_types[ $field_settings['type'] ];
+			$field_object = new $field_class_name;
 			$field_settings = $field_object->get_field_settings( $field_settings );
 
 			// Instatiates the template class.
-			$template = new $this->template_types[ $field_settings['args']['template'] ];
+			$template_class_name = 'ModularWP\Formalize\Templates\\' . $this->template_types[ $field_settings['args']['template'] ];
+			$template = new $template_class_name;
 
 			// Is this a widget instance?
 			if ( !empty( $field_settings['widget_instance'] ) ) {
@@ -185,8 +194,6 @@ class Formalize {
 			}
 
 			// Generates the form field.
-			// $output .= $field->get_label($field_settings['args']['label'], $field_settings['id'] );
-			// $output .= $field->output( $field_settings );
 			$output .= $template->output( $field_object, $field_settings );
 
 			// Is there anything to output after the form field?
@@ -235,7 +242,7 @@ class Formalize {
 		}
 
 		// Does a class exist for this field type?
-		if ( ! class_exists( $this->field_types[ $field_settings['type'] ] ) ) {
+		if ( ! class_exists( 'ModularWP\Formalize\Fields\\' . $this->field_types[ $field_settings['type'] ] ) ) {
 			return false;
 		}
 

@@ -1,7 +1,10 @@
 <?php
 
-class WP_Formalize_Template_Widget extends WP_Formalize_Template {
+namespace ModularWP\Formalize\Templates;
 
+use ModularWP\Formalize\Interfaces\FieldInterface;
+
+class Widget extends Base {
 	/**
 	 * Outputs the input field
 	 *

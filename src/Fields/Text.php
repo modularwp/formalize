@@ -1,8 +1,11 @@
 <?php
 
-namespace ModularWP\Formalize;
+namespace ModularWP\Formalize\Fields;
 
-class TextField extends BaseField {
+use ModularWP\Formalize\FieldInterface;
+use ModularWP\Formalize\Interfaces\Field;
+
+class Text extends Base {
 
 	/**
 	 * Generates the form field

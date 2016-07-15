@@ -8,8 +8,8 @@
 
 namespace ModularWP\Formalize\Interfaces;
 
-use ModularWP\Formalize\FieldInterface;
+use ModularWP\Formalize\Interfaces\FieldInterface;
 
-interface Template {
+interface TemplateInterface {
 	public function output( FieldInterface $field, $instance = array() );
 }

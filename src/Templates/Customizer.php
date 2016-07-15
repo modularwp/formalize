@@ -1,6 +1,10 @@
 <?php
 
-class WP_Formalize_Template_Customizer extends WP_Formalize_Template {
+namespace ModularWP\Formalize\Templates;
+
+use ModularWP\Formalize\Interfaces\FieldInterface;
+
+class Customizer extends Base {
 
 	/**
 	 * Outputs the input field
